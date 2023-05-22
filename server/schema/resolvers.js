@@ -34,13 +34,13 @@ const resolvers = {
             return {token, user};
         },
     
-    CreateUser: async (parent, args) => {
+    createUser: async (parent, args) => {
         const user = await User.create(args);
         const token = signToken(user);
 
         return {token, user};
     },
-    SaveBook: async (parent, {bookData}, context) => {
+    saveBook: async (parent, {bookData}, context) => {
         if(context.user) {
             const updateUser = await User.findByIdAndUpdate(
                 {_id: context.user._id},
@@ -53,7 +53,7 @@ const resolvers = {
 
         throw new AuthenticationError('You need to be logged in!');
     },
-    RemoveBook: async (parent, {bookId}, context) => {
+    removeBook: async (parent, {bookId}, context) => {
         if(context.user) {
             const updateUser = await User.findByIdAndUpdate(
                 {_id: context.user._id},
